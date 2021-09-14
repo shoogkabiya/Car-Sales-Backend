@@ -32,3 +32,5 @@ const signup = async (req, res) => {
     res.status(500).json("server error");
   }
 };
+
+module.exports = signup;
