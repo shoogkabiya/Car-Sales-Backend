@@ -1,5 +1,6 @@
 const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
+const ImagesSchema = require("./images");
 
 // creating cars schema
 const CarsSchema = new Schema({
@@ -13,6 +14,7 @@ const CarsSchema = new Schema({
   original_ownership: String,
   next_test: String,
   annual_licensing_fee: String,
+  images: [[ImagesSchema]],
 });
 
 // creating cars model
