@@ -4,14 +4,15 @@ const PORT = 4000;
 const app = express();
 const cors = require("cors");
 const Connection = require("./database/connection");
-
-//import Routers
-const consumerRouter = require("./routers/consumerRouter");
-const userRouter = require("./routers/userRouter");
+const handleError = require("./middlewares/error");
 
 //
 app.use(cors());
 app.use(express.json());
+
+//import Routers
+const consumerRouter = require("./routers/consumerRouter");
+const userRouter = require("./routers/userRouter");
 
 //
 app.all(/consumer/, consumerRouter);
@@ -22,3 +23,5 @@ app.listen(PORT, () => {
   Connection();
   console.log(`Server listen on port : ${PORT}`);
 });
+
+app.use(handleError);
