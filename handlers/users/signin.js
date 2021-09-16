@@ -16,12 +16,14 @@ const signin = (req, res, next) => {
       .then((response) => {
         if (response) {
           const { _id: id, user_password: password } = response;
+
           bcrypt.compare(user_password, password).then((match) => {
             if (!match) {
               if (!match) {
                 return res.status(403).json("error generator");
               }
             }
+
             const access_token = tokenGenerator({
               id,
               role: "user",

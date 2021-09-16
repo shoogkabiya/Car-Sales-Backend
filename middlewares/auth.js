@@ -32,4 +32,4 @@ const verifyUser = (userRole) => {
   };
 };
 
-module.exports = { verifyUser };
+module.exports = verifyUser;
