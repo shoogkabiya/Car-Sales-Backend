@@ -10,12 +10,15 @@ const { tokenGenerator } = require("../utils");
 
 const signin = (req, res, next) => {
   const { email, user_password } = req.body;
+  console.log("req.body:", req.body);
 
   if (email && user_password) {
     User.findOne({ email })
       .then((response) => {
         if (response) {
-          const { _id: id, user_password: password } = response;
+          const { _id: id, user_password: password, cars: cars_id } = response;
+
+          console.log("response:", response);
 
           bcrypt.compare(user_password, password).then((match) => {
             if (!match) {
@@ -28,7 +31,7 @@ const signin = (req, res, next) => {
               id,
               role: "user",
             });
-            res.status(200).send({ access_token });
+            res.status(200).send({ access_token, cars_id });
           });
         } else {
           return res.status(404).send("email not found");

@@ -5,7 +5,7 @@ const addCars = async (req, res, next) => {
   const newcar = req.body;
   console.log("newcar:", newcar);
 
-  const car = new Car({
+  const cars = new Car({
     version: newcar.version,
     year: newcar.year,
     engine: newcar.engine,
@@ -20,9 +20,12 @@ const addCars = async (req, res, next) => {
   });
 
   try {
-    const newCar = await car.save();
+    const newCar = await cars.save();
     console.log("newCar:", newCar);
     res.status(200).json({ message: "car added succesfuly!" });
+    const id_arr = [];
+    newCar.map((item) => id_arr.push(item.id));
+    req.idsArray = id_arr;
   } catch (error) {
     console.log(error);
   }

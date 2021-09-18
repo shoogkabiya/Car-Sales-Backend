@@ -8,6 +8,7 @@ const UserSchema = new Schema({
   email: String,
   user_password: String,
   confirm_user_password: String,
+  cars: [{ type: mongoose.Schema.Types.ObjectId, ref: "cars" }],
 });
 
 // creating user model
