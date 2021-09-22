@@ -16,7 +16,12 @@ const signin = (req, res, next) => {
     User.findOne({ email })
       .then((response) => {
         if (response) {
-          const { _id: id, user_password: password, cars: cars_id } = response;
+          const {
+            _id: id,
+            user_password: password,
+            cars: cars_id,
+            consumers: consumers_id,
+          } = response;
 
           console.log("response:", response);
 
@@ -31,7 +36,7 @@ const signin = (req, res, next) => {
               id,
               role: "user",
             });
-            res.status(200).send({ access_token, cars_id });
+            res.status(200).send({ access_token, cars_id, consumers_id });
           });
         } else {
           return res.status(404).send("email not found");
