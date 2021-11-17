@@ -9,14 +9,15 @@ const bcrypt = require("bcryptjs");
 const { tokenGenerator } = require("../utils");
 
 const signin = (req, res, next) => {
-  const { email, consumer_password } = req.body;
+  const { email, password } = req.body;
 
-  if (email && consumer_password) {
+  if (email && password) {
     Consumer.findOne({ email })
       .then((response) => {
         if (response) {
-          const { _id: id, consumer_password: password } = response;
-          bcrypt.compare(consumer_password, password).then((match) => {
+          const { _id: id, password: savedPassword } = response;
+          console.log("response:", response);
+          bcrypt.compare(password, savedPassword).then((match) => {
             if (!match) {
               if (!match) {
                 return res.status(403).json("error generator");

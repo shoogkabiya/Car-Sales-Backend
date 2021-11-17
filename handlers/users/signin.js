@@ -9,27 +9,25 @@ const bcrypt = require("bcryptjs");
 const { tokenGenerator } = require("../utils");
 
 const signin = (req, res, next) => {
-  const { email, user_password } = req.body;
-  console.log("req.body:", req.body);
+  const { email, password } = req.body;
+  // console.log("req.body:", req.body);
 
-  if (email && user_password) {
+  if (email && password) {
     User.findOne({ email })
       .then((response) => {
         if (response) {
           const {
             _id: id,
-            user_password: password,
+            password: savedPassword,
             cars: cars_id,
             consumers: consumers_id,
           } = response;
 
           console.log("response:", response);
 
-          bcrypt.compare(user_password, password).then((match) => {
+          bcrypt.compare(password, savedPassword).then((match) => {
             if (!match) {
-              if (!match) {
-                return res.status(403).json("error generator");
-              }
+              return res.status(403).json("error generator");
             }
 
             const access_token = tokenGenerator({

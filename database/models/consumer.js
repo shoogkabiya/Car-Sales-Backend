@@ -6,8 +6,8 @@ const ConsumerSchema = new Schema({
   firstname: String,
   lastname: String,
   email: String,
-  consumer_password: String,
-  confirm_consumer_password: String,
+  password: String,
+  confirm_password: String,
 });
 
 // creating consumer model

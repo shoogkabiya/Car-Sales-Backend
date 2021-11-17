@@ -6,8 +6,8 @@ const UserSchema = new Schema({
   firstname: String,
   lastname: String,
   email: String,
-  user_password: String,
-  confirm_user_password: String,
+  password: String,
+  confirm_password: String,
   cars: [{ type: mongoose.Schema.Types.ObjectId, ref: "cars" }],
   consumers: [{ type: mongoose.Schema.Types.ObjectId, ref: "consumer" }],
 });

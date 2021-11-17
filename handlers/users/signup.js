@@ -6,13 +6,7 @@ const bcrypt = require("bcryptjs");
 const tokenGenerator = require("../utils").tokenGenerator;
 
 const signup = async (req, res) => {
-  const {
-    firstname,
-    lastname,
-    email,
-    user_password,
-    confirm_user_password,
-  } = req.body;
+  const { firstname, lastname, email, password, confirm_password } = req.body;
 
   try {
     const userfound = await User.findOne({ email });
@@ -22,14 +16,14 @@ const signup = async (req, res) => {
     }
     bcrypt
       .genSalt(10)
-      .then((salt) => bcrypt.hash(user_password, salt))
+      .then((salt) => bcrypt.hash(password, salt))
       .then((hash) => {
         const newUser = new User({
           firstname,
           lastname,
           email,
-          user_password: hash,
-          confirm_user_password,
+          password: hash,
+          confirm_password,
         });
 
         newUser.save().then((newuser) => {

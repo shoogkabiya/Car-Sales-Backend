@@ -8,15 +8,17 @@ const handleError = require("./middlewares/error");
 
 //
 app.use(cors());
-app.use(express.json());
+app.use(express.json({ limit: "25mb" }));
 
 //import Routers
 const consumerRouter = require("./routers/consumerRouter");
 const userRouter = require("./routers/userRouter");
+const carRouter = require("./routers/carRouter");
 
 //
 app.all(/consumer/, consumerRouter);
 app.all(/user/, userRouter);
+app.all(/car/, carRouter);
 
 //
 app.listen(PORT, () => {
