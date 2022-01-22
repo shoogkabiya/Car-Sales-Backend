@@ -7,12 +7,16 @@ const getCars = async (req, res, next) => {
 };
 
 const getCarByImage = async (req, res, next) => {
-  const images = req.body.images;
+  const image = req.body.images;
   try {
-    let imagesObj = await Car.find({
-      images: images,
-    });
-    return res.status(200).json(imagesObj);
+    let images = await Car.find({
+      images: {
+        $eq: image,
+      },
+    }).populate({ path: "images" });
+    console.log("images:", images);
+
+    return res.status(200).send(images);
   } catch (error) {
     console.log(error);
     return res.status(500).send("Server Error");

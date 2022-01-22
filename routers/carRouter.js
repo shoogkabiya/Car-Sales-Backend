@@ -7,6 +7,6 @@ const { getCars, getCarByImage } = require("../handlers/cars/getCars");
 router.get("/car/getCars", getCars);
 
 // getCarByImage
-router.get("/car/getCarByImage", getCarByImage);
+router.post("/car/getCarByImage", getCarByImage);
 
 module.exports = router;
