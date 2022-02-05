@@ -14,6 +14,7 @@ const CarsSchema = new Schema({
   original_ownership: String,
   next_test: String,
   annual_licensing_fee: String,
+  price: String,
 });
 
 // creating cars model

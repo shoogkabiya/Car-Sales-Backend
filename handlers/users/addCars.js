@@ -17,6 +17,7 @@ const addCars = async (req, res, next) => {
     original_ownership: newcar.original_ownership,
     next_test: newcar.next_test,
     annual_licensing_fee: newcar.annual_licensing_fee,
+    price: newcar.price,
   });
   console.log("cars:", cars);
   try {
